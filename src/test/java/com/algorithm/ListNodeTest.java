@@ -181,6 +181,7 @@ public class ListNodeTest {
         if (head == null) {
             this.head = node;
         } else {
+//            指针后移到最后
             while (pointer.next != null) {
                 pointer = pointer.next;
             }
@@ -256,22 +257,7 @@ public class ListNodeTest {
         pointer.next = node;
     }
 
-    @Test
-    /*
-     * @Description: 链表的升序合并
-     * @Author: wertop
-     * @Date: 2022/6/14
-     */
-    public void mergeNodeList() {
-//        创建链表一
-        ListNode head = new ListNode(null);
-        for (int i = 0; i < 5; i++) {
-            int v = (int) (Math.random() * 10);
 
-
-        }
-
-    }
 
 
 }
