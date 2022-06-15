@@ -14,8 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 //测试路径要与包路径一致
 @SpringBootTest
 public class ListNodeTest {
-//    标识头部
-    public  ListNode head;
+    //    标识头部
+    public ListNode head;
 
     @Test
     /*
@@ -141,22 +141,120 @@ public class ListNodeTest {
     查：查询链表中是否包含指定值的节点*/
     @Test
     public void testList() {
+//        头插法演示
         for (int i = 0; i < 10; i++) {
             int v = (int) (Math.random() * 10);
             addFirst(v);
         }
-        while (head.next!=null){
+        while (head.next != null) {
             System.out.println(head.getVal());
             head = head.next;
         }
     }
-//    头插法
-    public void addFirst(int data){
+
+    //    单链表不带头结点头插法
+    public void addFirst(int data) {
         ListNode node = new ListNode(data);
         node.next = this.head;
         this.head = node;
     }
 
+    @Test
+    public void addNodeFinal() {
+        //        尾插法演示
+        for (int i = 0; i < 10; i++) {
+            int v = (int) (Math.random() * 10);
+            addFinally(v);
+        }
+        int size = size();
+        System.out.println(size);
+        while (head.next != null) {
+            System.out.println(head.getVal());
+            head = head.next;
+        }
+    }
+
+    //    单链表不带头结点尾插法
+    public void addFinally(int data) {
+        ListNode node = new ListNode(data);
+        ListNode pointer = this.head;
+        if (head == null) {
+            this.head = node;
+        } else {
+            while (pointer.next != null) {
+                pointer = pointer.next;
+            }
+            pointer.next = node;
+        }
+
+    }
+
+    @Test
+    /*
+     * @Description: 单链表的遍历
+     * @Author: wertop
+     * @Date: 2022/6/15
+     */
+    public void getLinkedListCount() {
+//        遍历链表
+        for (int i = 0; i < 20; i++) {
+            int v = (int) (Math.random() * 10);
+            addFinally(v);
+        }
+        int size = size();
+        System.out.println(size);
+    }
+
+    public int size() {
+        int count = 0;
+        ListNode pointer = this.head;
+        while (pointer != null) {
+            pointer = pointer.next;
+            count++;
+        }
+        return count;
+    }
+
+    @Test
+    /*
+     * @Description: 向指定的位置插入一个节点
+     * @Author: wertop
+     * @Date: 2022/6/15
+     */
+    public void insertNode() {
+
+    }
+
+    public ListNode findIndex(int index) {
+        //        先让指针后移index-1位,找到相应得插入位
+        int count = 0;
+        ListNode pointer = this.head;
+        while (count != index - 1) {
+            pointer = pointer.next;
+            count++;
+        }
+        return pointer;
+    }
+
+    //    在任意位置插入，第一个数据节点为0号下标
+    public void addIndex(int index, int data) {
+//        相应节点的合法性判断
+        if (index < 0 || index > size()) {
+            System.out.println("index得位置不合法");
+            return;
+        }
+        if (index == 0) {
+            this.addFirst(data);
+        }
+        if (index == size()) {
+            this.addFinally(data);
+        }
+//        中间的随机未知节点
+        ListNode pointer = findIndex(index);
+        ListNode node = new ListNode(data);
+        node.next = pointer.next;
+        pointer.next = node;
+    }
 
     @Test
     /*
