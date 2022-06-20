@@ -9,9 +9,9 @@ package com.algorithm;
  **/
 public class ListNode {
 //    数据域
-    int val;
+    public int val;
 //    指针域
-    ListNode next;
+    public ListNode next;
 
 
     public ListNode(int val, ListNode next) {
